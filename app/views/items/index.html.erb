@@ -1,0 +1,41 @@
+<div <div class="row">
+  <div class="small-12 columns">
+    <h3><%= link_to 'New Item', new_item_path %></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="small-6 small-text-left columns">
+    &nbsp;
+  </div>
+  <div class="small-2 small-text-right columns">
+    <b><%= @opening_balance.to_i %></b>
+  </div>
+  <div class="small-4 columns">
+    &nbsp;
+  </div>
+</div>
+
+<% opening_balance = @opening_balance %>
+<% @items.each do |item| %>
+  <div class="row">
+    <div class="small-1 small-text-left columns">
+      <%= item.created_at.strftime("%a") %>
+    </div>
+    <div class="small-3 small-text-left columns">
+      <%= item.description %>
+    </div>
+    <div class="small-2 small-text-right columns">
+      <%= item.amount.to_i  %>
+    </div>
+    <div class="small-2 small-text-right columns">
+      <%= (opening_balance -= item.amount).to_i %>
+    </div>
+   <div class="small-2 small-text-right columns">
+      <%= link_to 'Edit', edit_item_path(item) %>
+    </div>
+    <div class="small-2 small-text-left columns">
+      <%= link_to 'Delete', item, method: :delete %>
+    </div>
+  </div>
+<% end %>
+
